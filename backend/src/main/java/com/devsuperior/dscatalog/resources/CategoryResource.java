@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,15 +32,13 @@ public class CategoryResource {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id){		
-			
+	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id){			
 		CategoryDTO dto = service.findCategoryById(id);
 		return ResponseEntity.ok().body(dto);
 	}
 	
 	@PostMapping
-	public ResponseEntity<CategoryDTO> insertCategory(@RequestBody CategoryDTO dto){
-		
+	public ResponseEntity<CategoryDTO> insertCategory(@RequestBody CategoryDTO dto){		
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);		
@@ -47,11 +46,16 @@ public class CategoryResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Long id, @RequestBody CategoryDTO dto){
-		
-		dto = service.update(id, dto);
-				
+	public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Long id, @RequestBody CategoryDTO dto){		
+		dto = service.update(id, dto);				
 		return ResponseEntity.ok().body(dto);
+		
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable Long id){		
+		service.delete(id);				
+		return ResponseEntity.noContent().build();
 		
 	}
 }
