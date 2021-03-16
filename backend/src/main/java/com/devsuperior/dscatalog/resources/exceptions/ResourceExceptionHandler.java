@@ -53,7 +53,7 @@ public class ResourceExceptionHandler {
 		ValidationError error = new ValidationError();
 		
 		error.setTimestamp(Instant.now());
-		error.setStatus(status.value());
+		error.setStatus(status.value());	
 		error.setError("Validation Exception");
 		error.setMessage(e.getMessage());
 		error.setPath(req.getRequestURI());
