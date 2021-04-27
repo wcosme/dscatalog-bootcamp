@@ -28,6 +28,7 @@ public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid,
 	public void initialize(UserUpdateValid ann) {
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isValid(UserUpdateDTO dto, ConstraintValidatorContext context) {
 		
