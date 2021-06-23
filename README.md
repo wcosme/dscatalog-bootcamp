@@ -1,1 +1,0 @@
-# dscatalog-resources
