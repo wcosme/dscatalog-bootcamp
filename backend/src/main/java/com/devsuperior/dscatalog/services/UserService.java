@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -36,7 +37,7 @@ public class UserService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEnconder;
 	
-	
+	@Cacheable(value = "user")
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(PageRequest pageRequest){
 		Page<User> list = repository.findAll(pageRequest);

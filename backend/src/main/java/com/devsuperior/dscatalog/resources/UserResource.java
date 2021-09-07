@@ -73,4 +73,10 @@ public class UserResource {
 		return ResponseEntity.noContent().build();
 		
 	}
+	
+	@PostMapping(value = "/v2")
+	public ResponseEntity<UserDTO> findByIdV2(@RequestBody Long id){		
+		UserDTO dto = service.findUserById(id);
+		return ResponseEntity.ok().body(dto);
+	}
 }
