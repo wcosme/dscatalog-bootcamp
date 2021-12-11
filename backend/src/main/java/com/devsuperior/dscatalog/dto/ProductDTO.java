@@ -14,13 +14,9 @@ import javax.validation.constraints.Size;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.entities.Product;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ProductDTO implements Serializable{	
 	private static final long serialVersionUID = 1L;
 	
