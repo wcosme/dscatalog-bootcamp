@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.resources;
+package com.devsuperior.dscatalog.controllers;
 
 import java.net.URI;
 
@@ -25,7 +25,7 @@ import com.devsuperior.dscatalog.services.ProductService;
 
 @RestController
 @RequestMapping(value = "/products")
-public class ProductResource {
+public class ProductController {
 	
 	@Autowired
 	private ProductService service;
