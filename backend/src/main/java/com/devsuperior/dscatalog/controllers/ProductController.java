@@ -26,9 +26,13 @@ import com.devsuperior.dscatalog.services.ProductService;
 @RestController
 @RequestMapping(value = "/products")
 public class ProductController {
-	
+
+	private final ProductService service;
+
 	@Autowired
-	private ProductService service;
+	public ProductController(ProductService service) {
+		this.service = service;
+	}
 
 	@GetMapping
 	public ResponseEntity<Page<ProductDTO>> findAll(

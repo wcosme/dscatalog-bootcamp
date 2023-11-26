@@ -1,7 +1,10 @@
 package com.devsuperior.dscatalog.controllers.exceptions;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
+@Getter
 public class FieldMessage implements Serializable{	
 	private static final long serialVersionUID = 2740060405492453826L;
 	
@@ -17,16 +20,8 @@ public class FieldMessage implements Serializable{
 		this.message = message;
 	}
 
-	public String getFieldName() {
-		return fieldName;
-	}
-
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
-	}
-
-	public String getMessage() {
-		return message;
 	}
 
 	public void setMessage(String message) {

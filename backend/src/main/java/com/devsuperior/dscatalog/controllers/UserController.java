@@ -28,9 +28,12 @@ import com.devsuperior.dscatalog.services.UserService;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
-	
-	@Autowired
-	private UserService service;
+
+	private final UserService service;
+
+	public UserController(UserService service) {
+		this.service = service;
+	}
 
 	@GetMapping
 	public ResponseEntity<Page<UserDTO>> findAll(

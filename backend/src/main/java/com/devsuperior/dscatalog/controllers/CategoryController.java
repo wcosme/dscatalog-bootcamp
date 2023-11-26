@@ -24,9 +24,13 @@ import com.devsuperior.dscatalog.services.CategoryService;
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryController {
-	
+
+	private final CategoryService service;
+
 	@Autowired
-	private CategoryService service;
+	public CategoryController(CategoryService service) {
+		this.service = service;
+	}
 
 	@GetMapping
 	public ResponseEntity<Page<CategoryDTO>> findAll(
