@@ -28,21 +28,23 @@ import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 @Service
 public class UserService {
 
+	private final UserRepository repository;
+	private final RoleRepository roleRepository;
+	private final BCryptPasswordEncoder passwordEncoder;
+
 	@Autowired
-	private UserRepository repository;
-	
-	@Autowired
-	private RoleRepository roleRepository;
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEnconder;
-	
+	public UserService(UserRepository repository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEnconder) {
+		this.repository = repository;
+		this.roleRepository = roleRepository;
+		this.passwordEncoder = passwordEnconder;
+	}
+
 	@Cacheable(value = "user")
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(PageRequest pageRequest){
 		Page<User> list = repository.findAll(pageRequest);
 					
-		return list.map(product -> new UserDTO(product));
+		return list.map(UserDTO::new);
 	}
 
 	@Transactional(readOnly = true)
@@ -56,7 +58,7 @@ public class UserService {
 	public UserDTO insert(UserInsertDTO dto) {
 		User entity = new User();
 		copyDtoToEntity(dto, entity);
-		entity.setPassword(passwordEnconder.encode(dto.getPassword()));
+		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 		entity = repository.save(entity);
 		
 		return new UserDTO(entity);

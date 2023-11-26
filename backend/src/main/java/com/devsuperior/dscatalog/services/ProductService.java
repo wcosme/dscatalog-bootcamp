@@ -24,16 +24,21 @@ import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 @Service
 public class ProductService {
 
+	private final ProductRepository repository;
+	private final CategoryRepository categoryRepository;
+
+
 	@Autowired
-	private ProductRepository repository;
-	@Autowired
-	private CategoryRepository categoryRepository;
-	
+	public ProductService(ProductRepository repository, CategoryRepository categoryRepository) {
+		this.repository = repository;
+		this.categoryRepository = categoryRepository;
+	}
+
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(PageRequest pageRequest){
 		Page<Product> list = repository.findAll(pageRequest);
 					
-		return list.map(product -> new ProductDTO(product));
+		return list.map(ProductDTO::new);
 	}
 
 	@Transactional(readOnly = true)
