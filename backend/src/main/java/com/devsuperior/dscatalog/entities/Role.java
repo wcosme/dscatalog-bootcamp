@@ -1,8 +1,7 @@
 package com.devsuperior.dscatalog.entities;
 
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
